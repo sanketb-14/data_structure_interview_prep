@@ -12,29 +12,42 @@ const { Console } = require("console");
 // · The time or space complexity (as measured by Big O)'
 // depends only on the algorithm, not the hardware used to run the algorithm
 
-
-function merge(arr1 ,arr2){
-  let res = []
-  let i = 0
-  let j = 0
-  while ( i < arr1.length && j < arr2.length){
-    if(arr2[j]>arr1[i]){
-      res.push(arr1[i])
-      i++
-    }
-    else{
-      res.push(arr2[j])
-      j++
-    }
+  function getDigit(num , i){
+    return Math.floor(Math.abs(num) / Math.pow(10,i)) % 10
   }
-  while(i < arr1.length){
-    res.push(arr1[i])
-    i++
-  }
-  while(j < arr2.length){
-    res.push(arr2[j])
-    j++
-  }
-  return res
+function digitCount(num){
+  if(num ===0) return 1
+  return Math.floor(Math.log10(Math.abs(num))) + 1
 }
-console.log(merge([1,10,50],[2,14,99,100]))
+function mostDigit(nums){
+  let maxDigit = 0
+  for(let i = 0 ; i < nums.length ; i++){
+    maxDigit = Math.max(maxDigit, digitCount(nums[i]))
+  }
+  return maxDigit
+}
+console.log(mostDigit([45,45,560,10,1,1020]))
+
+function radixSort(arr){
+  maxDigitCount = mostDigit(arr)
+  for(let i = 0 ; i < maxDigitCount ; i++){
+    let digitBucket = Array.from({length:10},()=>[])
+    for(let j = 0 ; j< arr.length ; j++){
+      let digit = getDigit(arr[j],i)
+      digitBucket[digit].push(arr[j])
+    }
+    arr =[].concat(...digitBucket)
+    console.log(arr)
+    
+  
+  }
+  return arr
+  
+}
+
+
+
+console.log(radixSort([45,256,23,41,45666]))
+
+
+
