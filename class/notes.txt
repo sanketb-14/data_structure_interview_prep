@@ -1,0 +1,6 @@
+What is a class?
+A blueprint for creating objects
+with pre-defined properties and
+methods
+
+A constructor is a special type of method that is automatically called when an instance of a class is created. It is used to initialize the object's state. An instance is a specific object created from a class, often referred to as an "instance of the class."
